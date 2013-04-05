@@ -16,4 +16,9 @@ class Tokenizer
     {
         return $this->tokens;
     }
+    
+ 	public function current(){
+
+	}
+
 }
