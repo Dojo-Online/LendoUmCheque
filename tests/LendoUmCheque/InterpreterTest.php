@@ -18,7 +18,7 @@ class InterpreterTest extends \PHPUnit_Framework_TestCase
         $tokenizer   = new Tokenizer('dois');
         $interpreter = new Interpreter($tokenizer);
 
-        	$this->assertEquals(2, $interpreter->returnNumberMilhar());
+        	$this->assertEquals(2, $interpreter->interpret());
     }
     
 
