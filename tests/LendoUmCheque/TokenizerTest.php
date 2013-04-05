@@ -19,7 +19,7 @@ class TokenizerTest extends \PHPUnit_Framework_TestCase
         $this->assertCount(2, $tokens);
         $this->assertEquals('Uma', $tokens[0]);
         $this->assertEquals('expressão', $tokens[1]);
-   
+
     }
 
     public function testCallingCurrentWillReturnTheCurrentToken()
@@ -31,15 +31,31 @@ class TokenizerTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('Uma', $current);
     }
 
-    public function testWillMoveToTheNextToken()
+    public function testCallingNextWillMoveToTheNextToken()
     {
         $tokenizer = new Tokenizer('Uma outra expressão');
         $current   = $tokenizer->current();
-        
+
         $this->assertEquals('Uma', $current);
-        
+
         $tokenizer->next();
         $current = $tokenizer->current();
         $this->assertEquals('outra', $current);
+    }
+
+    public function testCallingPreviousWillMoveToThePrevious()
+    {
+        $tokenizer = new Tokenizer('Uma outra expressão');
+        $current   = $tokenizer->current();
+
+        $this->assertEquals('Uma', $current);
+
+        $tokenizer->next();
+        $current = $tokenizer->current();
+        $this->assertEquals('outra', $current);
+
+        $tokenizer->previous();
+        $current = $tokenizer->current();
+        $this->assertEquals('Uma', $current);
     }
 }

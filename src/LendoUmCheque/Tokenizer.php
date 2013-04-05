@@ -16,7 +16,7 @@ class Tokenizer
     {
         return $this->tokens;
     }
-    
+
     public function current()
     {
         return current($this->tokens);
@@ -27,4 +27,8 @@ class Tokenizer
         return next($this->tokens);
     }
 
+    public function previous()
+    {
+        return prev($this->tokens);
+    }
 }
