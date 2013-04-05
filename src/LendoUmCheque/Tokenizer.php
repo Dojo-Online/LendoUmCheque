@@ -17,8 +17,14 @@ class Tokenizer
         return $this->tokens;
     }
     
- 	public function current(){
+    public function current()
+    {
+        return current($this->tokens);
+    }
 
-	}
+    public function next()
+    {
+        return next($this->tokens);
+    }
 
 }
