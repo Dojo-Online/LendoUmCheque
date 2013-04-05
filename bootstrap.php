@@ -1,4 +1,5 @@
 <?php
+date_default_timezone_set('UTC');
 $bootstrapPath = dirname(realpath(__FILE__)). DIRECTORY_SEPARATOR;
 
 set_include_path(
