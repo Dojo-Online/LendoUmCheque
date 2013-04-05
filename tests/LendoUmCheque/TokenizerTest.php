@@ -18,7 +18,16 @@ class TokenizerTest extends \PHPUnit_Framework_TestCase
 
         $this->assertCount(2, $tokens);
         $this->assertEquals('Uma', $tokens[0]);
-        $this->assertEquals('Expressão', $tokens[1]);
+        $this->assertEquals('expressão', $tokens[1]);
    
+    }
+
+    public function testCallingCurrentWillReturnTheCurrentToken()
+    {
+        $Tokenizer = new Tokenizer('Uma outra expressão');
+
+        $current = $tokenizer->current();
+
+        $this->assertEquals('Uma', $current);
     }
 }
