@@ -61,5 +61,12 @@ class InterpreterTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(1433, $interpreter->interpret());
     }
 
+    public function testInterpretTwoMillionOneThousandFourHundredThirtyThreeToNumber()
+    {
+        $tokenizer = new Tokenizer('dois milhões e quinhentos e um mil e quatrocentos e trinta e três');
+        $interpreter = new Interpreter($tokenizer);
+
+        $this->assertEquals(2501433, $interpreter->interpret());
+    }
 
 }
