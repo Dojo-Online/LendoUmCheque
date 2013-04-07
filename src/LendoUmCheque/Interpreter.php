@@ -4,10 +4,6 @@ namespace LendoUmCheque;
 class Interpreter
 {
 
-    /**
-     * @var Tokenizer
-     */
-    private $tokenizer;
     private $cardinal = array(
         'zero' => 0,
         'um' => 1,
@@ -59,27 +55,29 @@ class Interpreter
         'quatrilh(ão|ões)' => 1000000000000000,
     );
 
-    public function __construct($tokenizer)
+    public function interpret(Tokenizer $tokenizer)
     {
-        $this->tokenizer = $tokenizer;
-    }
-
-    public function interpret()
-    {
+        $cents = false;
         $number = 0;
-        while ($token = $this->tokenizer->current()) {
-            $this->tokenizer->next();
+        while ($token = $tokenizer->current()) {
+            $tokenizer->next();
             if ($token == 'e') {
                 continue;
+            }
+            if ($token == 'reais') {
+                $cents = true;
             }
             if (count($thousand = $this->findValueFromToken($token, $this->thounsands)) > 0) {
                 $number *= (int)current($thousand);
             } else if (count($hundred = $this->findValueFromToken($token, $this->hundreds)) > 0) {
                 $number += (int)current($hundred);
             } else if (count($dozen = $this->findValueFromToken($token, $this->dozens)) > 0) {
-                $number += (int)current($dozen);
+                if ($cents)
+                    end($dozen);
+                
+                $number += (float)current($dozen) / ($cents ? 100 : 1);
             } else if (count($cardinal = $this->findValueFromToken($token, $this->cardinal)) > 0) {
-                $number += (int)current($cardinal);
+                $number += (float)current($cardinal) / ($cents ? 100 : 1);
             }
         }
         return $number;
